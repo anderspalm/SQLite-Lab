@@ -2,25 +2,38 @@
 -- traveling through Southern Europe. She's most likely traveling someplace where she won't be noticed,
 -- so find the least populated country in Southern Europe, and we'll start looking for her there.
 
+Select name,min(population) from country Where region GLOB '*Southern Europe*';
+--  vatican
 
 
 -- Clue #2: Now that we're here, we have insight that Carmen was seen attending language classes in
 -- this country's officially recognized language. Check our databases and find out what language is
 -- spoken in this country, so we can call in a translator to work with you.
 
+select language from countrylanguage WHERE countrycode = (select code character from country Where 
+name GLOB '*Vatican City State*');
+
+language  
+----------
+Italian   
 
 
 -- Clue #3: We have new news on the classes Carmen attended – our gumshoes tell us she's moved on
 -- to a different country, a country where people speak only the language she was learning. Find out which
 --  nearby country speaks nothing but that language.
 
-
+select countrycode from countrylanguage where language = "Italian" and percentage = 100;
+SMR
+sqlite> select name from country WHERE code = "SMR";
+San Marino
 
 -- Clue #4: We're booking the first flight out – maybe we've actually got a chance to catch her this time.
  -- There are only two cities she could be flying to in the country. One is named the same as the country – that
  -- would be too obvious. We're following our gut on this one; find out what other city in that country she might
  --  be flying to.
 
+select name from city WHERE countrycode = 'SMR' AND name IS NOT 'San Marino'; 
+Serravalle
 
 
 -- Clue #5: Oh no, she pulled a switch – there are two cities with very similar names, but in totally different
@@ -28,16 +41,31 @@
 -- headed to, but doesn't end the same. Find out the city, and do another search for what country it's in. Hurry!
 
 
+select name from city where name GLOB "*Serra*" AND name != "serravalle";
+Serra
+Tabo�o da Serra
+Itapecerica da Serra
+
+select countrycode from city where name = "Serra";
+BRA
+
 
 -- Clue #6: We're close! Our South American agent says she just got a taxi at the airport, and is headed towards
  -- the capital! Look up the country's capital, and get there pronto! Send us the name of where you're headed and we'll
  -- follow right behind you!
 
-
+select capital from country where code = "BRA";
+211
+select name from city where id = 211;
+Brazilia
 
 -- Clue #7: She knows we're on to her – her taxi dropped her off at the international airport, and she beat us to
  -- the boarding gates. We have one chance to catch her, we just have to know where she's heading and beat her to the
  -- landing dock.
+
+
+
+
 
 -- Clue #8: Lucky for us, she's getting cocky. She left us a note, and I'm sure she thinks she's very clever, but
 -- if we can crack it, we can finally put her where she belongs – behind bars.
@@ -49,9 +77,11 @@
 -- So I'm off to add one to the population I find
 -- In a city of ninety-one thousand and now, eighty five.
 
+select name,countrycode from city where population = 91084;
+Santa Monica, USA
 
 -- We're counting on you, gumshoe. Find out where she's headed, send us the info, and we'll be sure to meet her at the gates with bells on.
 
 
 
--- She's in ____________________________!
+-- She's in Santa Monica, USA!
