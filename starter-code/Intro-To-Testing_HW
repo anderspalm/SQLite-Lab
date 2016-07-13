@@ -1,0 +1,24 @@
+Pokemon App
+
+The login
+
+
+(Condition) The user can login
+Assertation 1: The user has signed up
+Assertation 2: The user can login successfully
+Assertation 3: The user has gps connection
+
+As a user, I can login with username and password
+As a user, I am kept logged in on the device
+As a user, I will be taken to the loading screen followed by the map of where I am
+As a user, I can have symbol inside my username and password
+As a user, I can be prevented from moving forward if the EditText fields are blank
+
+(Condition) The user can catch pokemon
+Assertation 1; After pressing on a pokemon the user will be taken to a different view
+Assertation 2; After 
+
+As a user, I can catch a pokemon if I have pokeballs
+As a user, I can catch pokemon if I have internet connection
+As a user, I can use items to help catch pokemon
+As a user
